@@ -1,0 +1,30 @@
+{
+  "function_arn": "arn:aws:lambda:us-east-1:444478093128:function:test-file-server",
+  "scripts": {
+    "tsc": "tsc",
+    "deploy_zip_existing": "yarn tsc && rm -rf node_modules && yarn install --prod && rm dist/lambda.zip && zip -r dist/lambda.zip node_modules && cd dist/ && zip -r lambda.zip . && aws lambda update-function-code --function-name ${npm_package_function_arn} --zip-file fileb://lambda.zip && cd ../ && rm -rf node_modules && yarn install",
+    "deploy_zip": "yarn tsc && rm -rf node_modules && yarn install --prod && zip -r dist/lambda.zip node_modules && cd dist/ && zip -r lambda.zip . && aws lambda update-function-code --function-name ${npm_package_function_arn} --zip-file fileb://lambda.zip && cd ../ && rm -rf node_modules && yarn install"
+  },
+  "dependencies": {
+    "@middy/core": "^3.6.2",
+    "@middy/do-not-wait-for-empty-event-loop": "^3.6.2",
+    "@middy/http-error-handler": "^3.6.2",
+    "@middy/http-header-normalizer": "^3.6.2",
+    "@middy/http-json-body-parser": "^3.6.2",
+    "@middy/http-multipart-body-parser": "^3.6.2",
+    "@middy/http-router": "^3.6.2",
+    "@middy/http-urlencode-body-parser": "^3.6.2",
+    "@middy/http-urlencode-path-parser": "^3.6.2",
+    "@middy/validator": "^3.6.2",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.5",
+    "type-fest": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.108",
+    "@types/node": "^18.11.9",
+    "aws-sdk": "^2.1253.0",
+    "typescript": "^4.8.4"
+  }
+}
